@@ -12,14 +12,14 @@ pipeline {
       when {
         expression {
           openshift.withCluster() {
-            return !openshift.selector("bc", "mapit").exists();
+            return !openshift.selector("bc", "mapit-spring").exists();
           }
         }
       }
       steps {
         script {
           openshift.withCluster() {
-            openshift.newBuild("--name=mapit", "--image-stream=redhat-openjdk18-openshift:1.1", "--binary")
+            openshift.newBuild("--name=mapit-spring", "--image-stream=redhat-openjdk18-openshift:1.1", "--binary")
           }
         }
       }
